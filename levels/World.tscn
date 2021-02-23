@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://interface/HUD.tscn" type="PackedScene" id=1]
+[ext_resource path="res://levels/background-test.png" type="Texture" id=2]
+[ext_resource path="res://actors/player/PlayerStateMachine/PlayerStateMachine.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemy/Enemy.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 327.93, 10 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 5.99999
+height = 12.0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 48 )
+
+[node name="World" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="UpCollide" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2( 319, 92 )
+shape = SubResource( 1 )
+
+[node name="Post" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2( 284, 110 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="DownCollide" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2( 319, 190 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2( -8, 140 )
+shape = SubResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 1 )]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 3.0
+margin_bottom = 3.0
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Enemy" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 189, 136 )
+
+[node name="PlayerStateMachine" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 59, 137 )

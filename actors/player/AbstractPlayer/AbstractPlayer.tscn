@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://actors/player/AbstractPlayer/AbstractPlayer.gd" type="Script" id=1]
+[ext_resource path="res://actors/hit-hurtboxes/Hitbox.tscn" type="PackedScene" id=2]
+
+
+[node name="AbstractPlayer" type="KinematicBody2D"]
+collision_layer = 2147483650
+collision_mask = 17
+script = ExtResource( 1 )
+Max_MovSpeed = 130
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="Hitbox" parent="Sprite" instance=ExtResource( 2 )]
+
+[node name="Hurtbox" type="Area2D" parent="Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Hurtbox"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
