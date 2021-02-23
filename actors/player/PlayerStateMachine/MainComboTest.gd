@@ -47,7 +47,7 @@ func _on_Hitbox_hit():
 func hit_stop():
 	get_owner().animation_player.playback_speed = 0.1
 	combo_timeout.set_paused(true)
-	yield(get_tree().create_timer(0.16), "timeout")
+	yield(get_tree().create_timer(0.08), "timeout")
 	get_owner().animation_player.playback_speed = 1
 	combo_timeout.set_paused(false)
 

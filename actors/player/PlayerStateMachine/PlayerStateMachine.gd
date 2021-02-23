@@ -6,7 +6,6 @@ onready var animation_player = $AnimationPlayer
 func get_input_direction():
 	input_direction.y = Input.get_action_strength('ui_down') - Input.get_action_strength('ui_up')
 	input_direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength('ui_left')
-	input_direction = input_direction.normalized()
 	return input_direction
 	
 func _ready():

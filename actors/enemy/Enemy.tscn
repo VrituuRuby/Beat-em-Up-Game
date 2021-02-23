@@ -1,15 +1,41 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://actors/enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://actors/shadow.png" type="Texture" id=2]
-[ext_resource path="res://actors/enemy/enemy-damage.png" type="Texture" id=3]
+[ext_resource path="res://actors/enemy/enemy-spritesheet.png" type="Texture" id=3]
 [ext_resource path="res://actors/hit-hurtboxes/Hurtbox.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 10 )
 
 [sub_resource type="Animation" id=2]
-resource_name = "Hurt"
+resource_name = "Dead"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ) ]
+}
+
+[sub_resource type="Animation" id=3]
 length = 0.5
 step = 0.01
 tracks/0/type = "value"
@@ -22,7 +48,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 1 ]
+"values": [ 2 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -57,14 +83,25 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.02, 0.03, 0.05, 0.08, 0.1, 0.17 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.08, 0.1, 0.17 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.215686, 0.933333, 0.376471, 1 ), Color( 0.960784, 0.0862745, 0.352941, 1 ), Color( 0.215686, 0.933333, 0.376471, 1 ), Color( 0.960784, 0.0862745, 0.352941, 1 ), Color( 0.215686, 0.933333, 0.376471, 1 ), Color( 0.960784, 0.0862745, 0.352941, 1 ), Color( 0.215686, 0.933333, 0.376471, 1 ) ]
+"values": [ Color( 0.960784, 0.0862745, 0.352941, 1 ), Color( 0.960784, 0.0862745, 0.352941, 1 ), Color( 1, 1, 1, 1 ), Color( 0.960784, 0.0862745, 0.352941, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Idle"
+[sub_resource type="Animation" id=4]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -101,10 +138,117 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0.215686, 0.933333, 0.376471, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="Animation" id=5]
+resource_name = "Knockback"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 0.225313, 1, 9.51367 ),
+"update": 0,
+"values": [ Vector2( 0, -20 ), Vector2( 0, -50 ), Vector2( 0, -20 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Stun"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.980392, 0.945098, 0.0470588, 1 ), Color( 1, 1, 1, 1 ), Color( 0.980392, 0.945098, 0.0470588, 1 ), Color( 1, 1, 1, 1 ), Color( 0.980392, 0.945098, 0.0470588, 1 ), Color( 1, 1, 1, 1 ), Color( 0.980392, 0.945098, 0.0470588, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 10, 17 )
 
 [node name="Enemy" type="KinematicBody2D"]
@@ -121,16 +265,19 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.215686, 0.933333, 0.376471, 1 )
-position = Vector2( 0, -32 )
+position = Vector2( 0, -20 )
 texture = ExtResource( 3 )
-hframes = 2
-frame = 1
+vframes = 2
+hframes = 3
+frame = 4
 region_rect = Rect2( 18, 0, 300, 128 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Hurt = SubResource( 2 )
-anims/Idle = SubResource( 3 )
+anims/Dead = SubResource( 2 )
+anims/Hurt = SubResource( 3 )
+anims/Idle = SubResource( 4 )
+anims/Knockback = SubResource( 5 )
+anims/Stun = SubResource( 6 )
 
 [node name="Label" type="Label" parent="."]
 visible = false
@@ -149,7 +296,10 @@ collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 2, -26 )
-shape = SubResource( 4 )
+shape = SubResource( 7 )
+
+[node name="StunTimer" type="Timer" parent="."]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
 
 [editable path="Hurtbox"]

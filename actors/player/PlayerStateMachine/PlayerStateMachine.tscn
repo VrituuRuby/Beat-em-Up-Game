@@ -201,7 +201,7 @@ tracks/6/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "Hit3"
 length = 0.28
 step = 0.02
@@ -294,7 +294,7 @@ tracks/6/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 0.32
 loop = true
 step = 0.08
@@ -347,7 +347,7 @@ tracks/3/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 length = 0.56
 loop = true
 step = 0.07
@@ -400,23 +400,25 @@ tracks/3/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "Hit1"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Hit2"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Hit3"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "Hit4"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=15]
 
@@ -425,6 +427,8 @@ animation = "Run"
 [sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=19]
 switch_mode = 2
@@ -435,40 +439,36 @@ switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
-[sub_resource type="AnimationNodeStateMachine" id=27]
-states/Hit1/node = SubResource( 9 )
+[sub_resource type="AnimationNodeStateMachine" id=26]
+states/Hit1/node = SubResource( 8 )
 states/Hit1/position = Vector2( 135, 6 )
-states/Hit2/node = SubResource( 10 )
+states/Hit2/node = SubResource( 9 )
 states/Hit2/position = Vector2( 240, -55 )
-states/Hit3/node = SubResource( 11 )
+states/Hit3/node = SubResource( 10 )
 states/Hit3/position = Vector2( 412, -55 )
-states/Hit4/node = SubResource( 12 )
+states/Hit4/node = SubResource( 11 )
 states/Hit4/position = Vector2( 528, 6 )
-states/Idle/node = SubResource( 13 )
+states/Idle/node = SubResource( 12 )
 states/Idle/position = Vector2( 226, 97 )
-states/Run/node = SubResource( 14 )
+states/Run/node = SubResource( 13 )
 states/Run/position = Vector2( 470, 97 )
-transitions = [ "Idle", "Run", SubResource( 15 ), "Run", "Idle", SubResource( 16 ), "Idle", "Hit1", SubResource( 17 ), "Hit1", "Hit2", SubResource( 18 ), "Hit1", "Idle", SubResource( 19 ), "Hit2", "Idle", SubResource( 20 ), "Hit3", "Idle", SubResource( 21 ), "Hit2", "Hit3", SubResource( 22 ), "Hit3", "Hit2", SubResource( 23 ), "Hit3", "Hit4", SubResource( 24 ), "Hit4", "Idle", SubResource( 25 ), "Run", "Hit1", SubResource( 26 ) ]
+transitions = [ "Idle", "Run", SubResource( 14 ), "Run", "Idle", SubResource( 15 ), "Idle", "Hit1", SubResource( 16 ), "Hit1", "Hit2", SubResource( 17 ), "Hit1", "Idle", SubResource( 18 ), "Hit2", "Idle", SubResource( 19 ), "Hit3", "Idle", SubResource( 20 ), "Hit2", "Hit3", SubResource( 21 ), "Hit3", "Hit2", SubResource( 22 ), "Hit3", "Hit4", SubResource( 23 ), "Hit4", "Idle", SubResource( 24 ), "Run", "Hit1", SubResource( 25 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -72.2206, -106.848 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=28]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=27]
 
 [node name="PlayerStateMachine" type="KinematicBody2D"]
 collision_layer = 2147483650
@@ -508,14 +508,14 @@ shape = SubResource( 2 )
 autoplay = "Idle"
 anims/Hit1 = SubResource( 3 )
 anims/Hit2 = SubResource( 4 )
-anims/Hit3 = SubResource( 6 )
-anims/Idle = SubResource( 7 )
-anims/Run = SubResource( 8 )
+anims/Hit3 = SubResource( 5 )
+anims/Idle = SubResource( 6 )
+anims/Run = SubResource( 7 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 27 )
+tree_root = SubResource( 26 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 28 )
+parameters/playback = SubResource( 27 )
 
 [node name="States" type="Node" parent="."]
 
